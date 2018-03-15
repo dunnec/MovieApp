@@ -1,7 +1,19 @@
-<h2><%= @movie.title %></h2>
-<h3><%= @movie.year %></h3>
-<h4>Genre: <%= @movie.genre.name %></h4>
-<p><%= @movie.description %></p>
+<div class="row">
+	<div class="col-md-4">
+		<%= image_tag @movie.movie_img.url(:movie_show), class:"movie_show"%>
+	</div>
+	<div class="col-md-8">
+		<h2><%= @movie.title %></h2>
+		<h3><%= @movie.year %></h3>
+		<h4>Genre: <%= @movie.genre.name %></h4>
+		<p><%= @movie.description %></p>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<!--Where reviews go-->
+		</div>
+	</div>
+</div>
 
 <%= link_to "Back", root_path %>
 
