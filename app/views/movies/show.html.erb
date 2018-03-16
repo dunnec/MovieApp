@@ -3,19 +3,34 @@
 		<%= image_tag @movie.movie_img.url(:movie_show), class:"movie_show"%>
 	</div>
 	<div class="col-md-8">
-		<h2><%= @movie.title %></h2>
-		<h3><%= @movie.year %></h3>
-		<h4>Genre: <%= @movie.genre.name %></h4>
-		<p><%= @movie.description %></p>
+		<div class="movie-info">
+			<h1 class="movie-title"><%= @movie.title %></h1>
+			<span>Average Rating</span>
+			<div class="average-review-rating" data-score="<%= @average_review %>"></div>
+			<span class="number-of-reviews">Based on <%= @movie.reviews.count %> reviews</span>
+			<h3 class="movie-author"><%= @movie.year %></h3>
+			<h4>Genre: <%= @movie.genre.name %></h4>
+			<p class="movie-desc"><%= @movie.description %></p>
+		</div>
 	</div>
+</div>
 	<div class="row">
+		<%= link_to "Back", root_path %>
 		<div class="col-md-4">
 			<!--Where reviews go-->
+		
+	
+	<h1>Reviews</h1>
+	<div class="reviews">
+		<%= render @movie.reviews %>
+		<div>
+			<%= link_to "Add Review", new_movie_review_path(@movie) %>			
 		</div>
 	</div>
 </div>
 
-<%= link_to "Back", root_path %>
+
+
 
 <% if user_signed_in? %>
 	<% if @movie.user_id==current_user.id%>
@@ -23,3 +38,23 @@
 		<%= link_to "Delete", movie_path(@movie), method: :delete, data: {confirm: "Are you sure you want to delete this item?"} %>
 	<% end %>
 <% end %>
+
+<script>
+	$('.review-rating').raty({
+		readOnly:true,
+		score: function(){
+			return $(this).attr('data-score');
+		},
+		path: '/assets/'
+	});
+</script>
+
+<script>
+	$('.average-review-rating').raty({
+		readOnly:true,
+		path: '/assets',
+		score: function(){
+			return $(this).attr('data-score')
+		}
+	});
+</script>

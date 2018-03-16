@@ -5,6 +5,7 @@
 	<div class="row">
 		<% @movies.each do |movie| %>
 		<div class="col-md-3">
+			<h4 class="text text-center" style="color:grey; font-weight: bold;"><%= movie.title %></h4>
 			<a href="/movies/<%= movie.id %>">
 				<%= image_tag movie.movie_img.url(:movie_index), class:"movie" %>
 			</a>
